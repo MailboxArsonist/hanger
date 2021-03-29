@@ -25,12 +25,14 @@ If you click on start it will create a 'history' for this workout which should a
 #improvements
 
 1. Add some real user auth/session, I just wanted something super simple to get up and running
-2. make it look nice
-3. add error handling, especially with the api calls
-4. Code in the create/edit workout could be a bit more dry
-5. add real validation, both client/server 
-6. I used dynamoDB to try something new but realistically using a relational db probably would have been better here, especially the scan for the email when logging in.
-7. refact the reducers for api calls to be more dry (I wanted to use these for better error handling/loading)
-8. add some redirection to anything /app and fetch data if refreshing on one of these pages (currently you can refresh on /app as the cookie is set, but I'd like to get round to fetching the correct data for each view)
-9. add client / api keys for security purposes
+2. add a timer/ intervals when you click on start
+3. make the app w/react-native
+4. make it look nice
+5. add error handling, especially with the api calls
+6. Code in the create/edit workout could be a bit more dry
+7. add real validation, both client/server 
+8. I used dynamoDB to try something new but realistically using a relational db probably would have been better here, especially the scan for the email when logging in.
+9. refact the reducers for api calls to be more dry (I wanted to use these for better error handling/loading)
+10. add some redirection to anything /app and fetch data if refreshing on one of these pages (currently you can refresh on /app as the cookie is set, but I'd like to get round to fetching the correct data for each view)
+11. add client / api keys for security purposes
 
