@@ -1,0 +1,26 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+}
+
+.container p {
+  margin-bottom: 2rem;
+  font-size: 1.2em;
+}
+
+.form a {
+  text-align: center;
+  padding: 1rem 2rem;
+  color: #fff;
+  background-color: var(--primary);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-bottom: 1rem;
+}
+
+.container a:hover {
+  background-color: var(--primary);
+}
