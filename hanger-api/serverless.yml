@@ -1,0 +1,101 @@
+service: hanger-api
+
+# app and org for use with dashboard.serverless.com
+app: hanger-api-app
+org: matthewdodd93
+
+# You can pin your service to only deploy with a specific Serverless version
+# Check out our docs for more details
+frameworkVersion: '2'
+
+provider:
+    name: aws
+    runtime: nodejs12.x
+    lambdaHashingVersion: 20201221
+    environment:
+        tableName: ${self:custom.tableName}
+    iamRoleStatements:
+        - Effect: Allow
+          Action:
+              - dynamodb:*
+          Resource: '*'
+
+
+custom:
+    tableName: hanger
+
+functions:
+    getUser:
+        handler: lambdas/endpoints/User/getUser.handler
+        events: 
+            - http: 
+                path: api/users/login
+                method: POST
+                cors: true
+    postUser:
+        handler: lambdas/endpoints/User/postUser.handler
+        events: 
+            - http: 
+                path: api/users/create
+                method: POST
+                cors: true
+    getWorkout:
+        handler: lambdas/endpoints/Workout/getWorkout.handler
+        events: 
+            - http: 
+                path: api/users/{ID}/workouts/{SK}
+                method: GET
+                cors: true
+    createWorkout:
+        handler: lambdas/endpoints/Workout/createWorkout.handler
+        events: 
+            - http: 
+                path: api/users/{ID}/workouts/createWorkout
+                method: POST
+                cors: true
+    updateWorkout:
+        handler: lambdas/endpoints/Workout/updateWorkout.handler
+        events: 
+            - http: 
+                path: api/users/{ID}/workouts/updateWorkout
+                method: PUT
+                cors: true
+    getWorkoutList:
+        handler: lambdas/endpoints/Workout/getWorkoutList.handler
+        events: 
+            - http: 
+                path: api/users/{ID}/workouts
+                method: GET
+                cors: true
+    createHistory:
+        handler: lambdas/endpoints/History/createHistory.handler
+        events: 
+            - http: 
+                path: api/users/{ID}/history/create
+                method: POST
+                cors: true
+    getHistoryList:
+        handler: lambdas/endpoints/History/getHistoryList.handler
+        events: 
+            - http: 
+                path: api/users/{ID}/history
+                method: GET
+                cors: true
+
+resources:
+    Resources:
+        HangerDynamo:
+            Type: AWS::DynamoDB::Table
+            Properties:
+                TableName: ${self:custom.tableName}
+                AttributeDefinitions:
+                    - AttributeName: ID
+                      AttributeType: S
+                    - AttributeName: SK
+                      AttributeType: S
+                KeySchema:
+                    - AttributeName: ID
+                      KeyType: HASH
+                    - AttributeName: SK
+                      KeyType: RANGE
+                BillingMode: PAY_PER_REQUEST
